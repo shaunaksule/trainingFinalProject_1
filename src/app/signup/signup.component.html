@@ -1,0 +1,80 @@
+<html>
+<head>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+
+<div class="jumbotron">
+  <h2 class="display-3" style="text-align: center;">Registration</h2>
+  <hr class="my-2">
+ 
+
+<div class="row">
+  <div class="col-md-8 offset-2">
+    <!-- <h3>Template Driven</h3> -->
+    <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()" >
+      <div class="form-group">
+        <label for="imgUrl">Image Url (DP)</label>
+        <input type="text" class="form-control" name="imgUrl" [(ngModel)]="model.imgUrl" #imgUrl="ngModel" [ngClass]="{'is-valid': f.submitted && firstName.invalid}" />
+      </div>
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" class="form-control" name="firstName" [(ngModel)]="model.firstName" #firstName="ngModel" [ngClass]="{'is-valid': f.submitted && firstName.invalid}" required minlength="3" maxlength="25"/>
+        <span class="text-danger" *ngIf="(firstName.touched || f.submitted) && firstName.errors?.required">First Name is Required!</span>
+        <span>Min Length 3, Max Length 25</span>
+      </div>
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" class="form-control" name="lastName" [(ngModel)]="model.lastName" #lastName="ngModel" [ngClass]="{'is-valid': f.submitted && lastName.invalid}" required minlength="3" maxlength="25"/>
+        <span class="text-danger" *ngIf="(lastName.touched || f.submitted) && lastName.errors?.required">Last Name is Required!</span>
+        <span>Min Length 3, Max Length 25</span>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel" [ngClass]="{'is-valid': f.submitted && email.invalid}"  email/>
+        <span class="text-danger" *ngIf="email.touched && email.errors?.email">Enter Valid Email!</span>
+      </div>
+      <div class="form-group">
+        <label for="mobile">Mobile</label>
+        <input pattern="[1-9]{1}[0-9]{9}" type="text" class="form-control" name="mobile" [(ngModel)]="model.mobile" #mobile="ngModel" [ngClass]="{'is-valid': f.submitted && password.invalid}" minlength="10" maxlength="10"/>
+      </div>
+      <div class="form-group">
+        <label for="userName">User Name</label>
+        <input pattern="^[A-Za-z0-9]+$" type="text" class="form-control" name="userName" [(ngModel)]="model.userName" #userName="ngModel" [ngClass]="{'is-valid': f.submitted && userName.invalid}" required minlength="3" maxlength="50"/>
+        <span class="text-danger" *ngIf="(userName.touched || f.submitted) && userName.errors?.required">User Name is Required!</span>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input pattern="^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{6,12}$" type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" [ngClass]="{'is-valid': f.submitted && password.invalid}" required />
+        <span class="text-danger" *ngIf="(password.touched || f.submitted) && password.errors?.required">Password is Required!</span>
+        <span>Password requirements: Should contain 1 upper case character, should contain only @ or & special character</span>
+      </div>
+      <div class="form-group">
+        <label>Position</label>
+        <div class="form-control">
+          <label class="radio-inline">
+            <input type="radio" name="position" value="administrator" [(ngModel)]="model.position" #position="ngModel" required >
+            Administrator   
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="position" value="customer" [(ngModel)]="model.position" #position="ngModel">
+            Customer
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <a href="">Terms & Conditions</a>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary" [disabled]="!f.valid">Sign Up</button>
+      </div>
+      <hr>
+      <div class="form-group" style="margin-left: auto; margin-right: auto;">
+          <span>If already registered, please Sign In!</span>
+          <br>
+        <a class="nav-link" routerLink="/signin"><button class="btn btn-primary" >Sign In</button></a>
+      </div>
+    </form>
+  </div>
+</div>
+</div>
+</html>
